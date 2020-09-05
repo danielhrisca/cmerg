@@ -35,11 +35,17 @@ Plot signal.
 
 Add signal to dataframe.
 
-```
+``` python
 
+# Simple example of adding ERG data to pandas.
+# TODO: Make 'toPd()' call
 import mfile
 import pandas as pd
 import numpy as np
+
+log1 = mfile.ERG('data-file.erg')
+
+speed = log1.get('Vhcl.v')
 
 t = np.array(speed.timestamps)
 spd = np.array(speed.samples)
