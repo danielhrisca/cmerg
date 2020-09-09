@@ -37,6 +37,13 @@ Add signal to dataframe.
 
 ``` python
 
+# New easy call to return a pandas dataframe.
+df = log1.to_pd()
+
+```
+
+``` python
+
 # Simple example of adding ERG data to pandas.
 # TODO: Make 'toPd()' call
 import mfile
