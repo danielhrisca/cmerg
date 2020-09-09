@@ -9,6 +9,7 @@ import re
 import sys
 from collections import OrderedDict
 import numpy as np
+import pandas as pd
 import datetime
 
 from asammdf import Signal, MDF
@@ -293,6 +294,12 @@ class ERG(object):
         if sigs:
             mdf.append(sigs, common_timebase=True)
         return mdf
+
+    def to_pd(self):
+        df = pd.DataFrame()
+        for key in self.signals:
+            df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
+        return df
 
     def get(self, name, raw=False):
         """
