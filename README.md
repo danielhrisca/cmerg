@@ -1,5 +1,5 @@
 # mfile
-Python parser for CarMaker ERG files.
+Python parser for CarMaker ERG files with Pandas dataframe export.
 
 ## 
 
