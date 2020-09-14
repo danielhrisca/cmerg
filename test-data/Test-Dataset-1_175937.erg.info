@@ -1,0 +1,209 @@
+#INFOFILE1.1 - Do not remove this line!
+
+File.Format = erg
+File.ByteOrder = LittleEndian
+File.DateInSeconds = 1597510788
+
+File.At.1.Name = Time
+File.At.1.Type = Double
+Quantity.Time.Unit = s
+
+File.At.2.Name = Brake.Park
+File.At.2.Type = Float
+
+File.At.3.Name = Brake.Pedal
+File.At.3.Type = Float
+
+File.At.4.Name = Car.PitchVel
+File.At.4.Type = Float
+Quantity.Car.PitchVel.Unit = rad/s
+
+File.At.5.Name = Car.RollVel
+File.At.5.Type = Float
+Quantity.Car.RollVel.Unit = rad/s
+
+File.At.6.Name = Car.WheelSpd_FL
+File.At.6.Type = Float
+Quantity.Car.WheelSpd_FL.Unit = rad/s
+
+File.At.7.Name = Car.WheelSpd_FR
+File.At.7.Type = Float
+Quantity.Car.WheelSpd_FR.Unit = rad/s
+
+File.At.8.Name = Car.WheelSpd_RL
+File.At.8.Type = Float
+Quantity.Car.WheelSpd_RL.Unit = rad/s
+
+File.At.9.Name = Car.WheelSpd_RR
+File.At.9.Type = Float
+Quantity.Car.WheelSpd_RR.Unit = rad/s
+
+File.At.10.Name = Car.ax
+File.At.10.Type = Float
+Quantity.Car.ax.Unit = m/s^2
+
+File.At.11.Name = Car.ay
+File.At.11.Type = Float
+Quantity.Car.ay.Unit = m/s^2
+
+File.At.12.Name = Car.az
+File.At.12.Type = Float
+Quantity.Car.az.Unit = m/s^2
+
+File.At.13.Name = Driver.Brake
+File.At.13.Type = Float
+
+File.At.14.Name = Driver.Gas
+File.At.14.Type = Float
+
+File.At.15.Name = Driver.Steer.AngAcc
+File.At.15.Type = Float
+Quantity.Driver.Steer.AngAcc.Unit = rad/s^2
+
+File.At.16.Name = Driver.Steer.AngVel
+File.At.16.Type = Float
+Quantity.Driver.Steer.AngVel.Unit = rad/s
+
+File.At.17.Name = Env.WindVel_ext.x
+File.At.17.Type = Float
+Quantity.Env.WindVel_ext.x.Unit = m/s
+
+File.At.18.Name = Env.WindVel_ext.y
+File.At.18.Type = Float
+Quantity.Env.WindVel_ext.y.Unit = m/s
+
+File.At.19.Name = Env.WindVel_ext.z
+File.At.19.Type = Float
+Quantity.Env.WindVel_ext.z.Unit = m/s
+
+File.At.20.Name = Env.WindVel_tot.x
+File.At.20.Type = Float
+Quantity.Env.WindVel_tot.x.Unit = m/s
+
+File.At.21.Name = Env.WindVel_tot.y
+File.At.21.Type = Float
+Quantity.Env.WindVel_tot.y.Unit = m/s
+
+File.At.22.Name = Env.WindVel_tot.z
+File.At.22.Type = Float
+Quantity.Env.WindVel_tot.z.Unit = m/s
+
+File.At.23.Name = Steer.WhlAng
+File.At.23.Type = Float
+Quantity.Steer.WhlAng.Unit = rad
+
+File.At.24.Name = Vhcl.Engine.rotv
+File.At.24.Type = Float
+Quantity.Vhcl.Engine.rotv.Unit = rad/s
+
+File.At.25.Name = Vhcl.PitchVel
+File.At.25.Type = Float
+Quantity.Vhcl.PitchVel.Unit = rad/s
+
+File.At.26.Name = Vhcl.RollVel
+File.At.26.Type = Float
+Quantity.Vhcl.RollVel.Unit = rad/s
+
+File.At.27.Name = Vhcl.YawRate
+File.At.27.Type = Float
+Quantity.Vhcl.YawRate.Unit = rad/s
+
+File.At.28.Name = Vhcl.v
+File.At.28.Type = Float
+Quantity.Vhcl.v.Unit = m/s
+
+File.At.29.Name = Driver.GearNo
+File.At.29.Type = Int
+
+Anim.Msg.0.Time = 0
+Anim.Msg.0.Class = Anim
+Anim.Msg.0.Id = 50
+Anim.Msg.0.Data:
+	SallxOCeij7BhwiyvprdHWPz3Y5JqWXQAAAAAwAAAAMAAAAAADIA
+
+Anim.Msg.1.Time = 0
+Anim.Msg.1.Class = Anim
+Anim.Msg.1.Id = 51
+Anim.Msg.1.Data:
+	/UXgCaqvrqzj9/D0O0bqo5dHdBX9ReAdAAAAAwAAAAMAAAAAADMA
+
+Anim.Msg.2.Time = 0
+Anim.Msg.2.Class = Anim
+Anim.Msg.2.Id = 21
+Anim.Msg.2.Data:
+	sMtD9ncFgbJCA0ZxZoTcjfa7gwGwy0NqAAAAaAAAAGgAAAAAABUAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAK
+
+Anim.VehicleClass = Car
+Anim.Vehicle.MovieSkin =
+
+Anim.Msg.3.Time = 0
+Anim.Msg.3.Class = Anim
+Anim.Msg.3.Id = 11
+Anim.Msg.3.Data:
+	Y2i/hggjzwW/n5KyWW6SeNCktURjaL62AAAA2AAAANgAAAAAAAsEAAACAAAAAAAA
+	P2UeuD6TdLxAizMzv2UeuD+6PXEAAAAAAAAAAAAAAABAHhR7AAAAAD8XjVBEj/Zm
+	RLGWZr3MzM0AAAAAPszMzUBeuFI/RaHLPpN0vEBeuFK/RaHLPpN0vD9YUew/RFod
+	PpN0vD9YUey/RFodPpN0vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	vczMzQAAAAA+zMzN
+
+Anim.Msg.4.Time = 0
+Anim.Msg.4.Class = Anim
+Anim.Msg.4.Id = 15
+Anim.Msg.4.Data:
+	F+0gzMblYXIIr4Q436AebGQmny8X7SAEAAAAiAAAAIgAAAAAAA8EAAAAAAAAAQAA
+	PqHKwT5QIMUAAAAAPlHrhYAAAAAAAAAARdrAAAH/AAA+ocrBPlAgxYAAAAA+UeuF
+	AAAAAAAAAABF2sAAAgEAAD6hysE+UCDFAAAAAD5R64WAAAAAAAAAAEXawAAD/wAA
+	PqHKwT5QIMWAAAAAPlHrhQAAAAAAAAAARdrAAAoK
+
+Anim.Msg.5.Time = 0
+Anim.Msg.5.Class = Anim
+Anim.Msg.5.Id = 23
+Anim.Msg.5.Data:
+	yYuclwsvG/ECyGJiHzI1Qv/ClsrJi5xPAAAAlAAAAJQAAAAAABcAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoK
+
+Anim.Msg.6.Time = 0
+Anim.Msg.6.Class = Instr
+Anim.Msg.6.Id = 0
+Anim.Msg.6.Data:
+	fg/+sUtZGT01qTUsSkQDG9k4Rux+D/6dAAAAFAAAABQAAAAAAAAAAAAGAAFFv7Tx
+	Q37RaQAAAAEK
+
+Anim.Msg.7.Time = 0
+Anim.Msg.7.Class = Anim
+Anim.Msg.7.Id = 22
+Anim.Msg.7.Data:
+	MK15xVauiQbKC2ouGR0q/CaAYKwwrXnpAAAAFAAAABQAAAAAABYAAAAGAAFFv7Tx
+	Q37RaQAAAAEK
+
+Anim.Msg.8.Time = 0
+Anim.Msg.8.Class = Anim
+Anim.Msg.8.Id = 17
+Anim.Msg.8.Data:
+	5DHcLtTQlMm7HEIb+MfBkgut4vzkMdw2AAAABAAAAAQAAAAAABEAAAoK
+
+Testrun = Test-Dataset-1
+
+SimParam.DeltaT = 0.001
+
+NamedValues.Count = 0
+
+KeyValues.Count = 0
+
+Comment:
+	For more details see session logfile
+
+CarMaker.NumVersion = 80101
+CarMaker.Version = 8.1.1
+CarMaker.Version.MatSupp = 8.1.1
+CarMaker.Version.Apo = 1.34.5
+CarMaker.Version.Info = 1.21.3
+CarMaker.Version.Driver = 8.1
+CarMaker.Version.Road = 8.1.1
+CarMaker.Version.Tire = 8.1
+
