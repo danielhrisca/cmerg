@@ -1,6 +1,6 @@
-from .erg import ERG
-from .version import __version__
+from .erg import *
+from .version import *
+
 
 class BSIG:
-
     pass
