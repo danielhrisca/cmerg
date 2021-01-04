@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" mfile version module """
+""" cmerg version module """
 
 
 __all__ = ['__version__']

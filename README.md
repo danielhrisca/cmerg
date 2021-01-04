@@ -1,25 +1,40 @@
-# mfile
+# cmerg
 Python parser for CarMaker ERG files with Pandas dataframe export.
 
-## 
+##
 
 ## Use and Examples
 
 Moslty these are notes for myself but hopefully someone else finds them useful.
 
+### Installation
+
+This package [is published on PyPI](https://pypi.org/project/cmerg/) under the name _cmerg_.
+
+### Windows
+``` shell
+
+> python -m pip install -U pip
+> python -m pip install cmerg
+
+```
+### Linux
+``` shell
+
+$ python3 -m pip install -U pip
+$ python3 -m pip install cmerg
+
+```
+
 ### Examples
-
-Make sure that all the dependencies are installed.
-
-``` pip install asammdf numpy ```
 
 Import the package folder.
 
-``` import mfile ```
+``` import cmerg ```
 
 Create ERG file object. (Using example file from repo)
 
-``` log1 = mfile.ERG('test-data/Test-Dataset-1_175937.erg') ```
+``` log1 = cmerg.ERG('test-data/Test-Dataset-1_175937.erg') ```
 
 List of the signals in the file.
 
@@ -46,11 +61,11 @@ df = log1.to_pd()
 
 # Simple example of adding ERG data to pandas.
 # TODO: Make 'toPd()' call
-import mfile
+import cmerg
 import pandas as pd
 import numpy as np
 
-log1 = mfile.ERG('data-file.erg')
+log1 = cmerg.ERG('data-file.erg')
 
 speed = log1.get('Vhcl.v')
 

@@ -1,10 +1,10 @@
-''' This file allows pip to create a wheel for the mfile package. '''
+''' This file allows pip to create a wheel for the cmerg package. '''
 
 
 from setuptools import setup
 from pathlib import Path
 
-from mfile import __version__
+from cmerg import __version__
 
 
 HERE = Path(__file__)
@@ -17,12 +17,12 @@ if not README.exists():
 
 
 setup(
-    name='mfile',
+    name='cmerg',
     version=__version__,
     description='Python parser for CarMaker ERG files.',
     long_description=README.read_text(),
     long_description_content_type='text/markdown',
-    url='https://github.com/danielhrisca/mfile',
+    url='https://github.com/danielhrisca/cmerg',
     author='Daniel Hrisca',
     author_email='daniel.hrisca@gmail.com',
     license='MIT',
@@ -36,7 +36,7 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     keywords='carmaker erg development',
-    packages=['mfile'],
+    packages=['cmerg'],
     # Because of pathlib it has to be >=3.4 and ~ is because we are not
     # committing to support python4.
     # See: https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
