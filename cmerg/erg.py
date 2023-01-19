@@ -318,6 +318,9 @@ class ERG(object):
             matches = [c for c in df.columns for f in columns_filter if f in c]
             matches = ["Time_s", *matches]
             df = df[matches]
+
+        # remove duplicate columns
+        df = df.loc[:,~df.columns.duplicated()].copy()
         
         # round to avoid CM reading errors
         df = df.round(digits)
@@ -331,7 +334,9 @@ class ERG(object):
     def to_pd(self):
         df = pd.DataFrame()
         for key in self.signals:
-            df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
+            #df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
+            _d = pd.DataFrame(np.array(self.get(key).samples),columns=[str(key + '_' + self.get(key).unit)])
+            df = pd.concat([df,_d],axis=1)
         return df
 
     def get(self, name, raw=False):
