@@ -191,8 +191,12 @@ class ERG(object):
         pass
 
     def _read(self):
-        with open(str(self.name) + ".info") as info_file:
-            info = info_file.read()
+        try:
+            with open(str(self.name) + ".info") as info_file:
+                info = info_file.read()
+        except:
+            with open(str(self.name) + ".info", encoding="latin-1") as info_file:
+                info = info_file.read()
 
         # search for byteorder
         pattern = r"\SPACES*File\.ByteOrder\SPACES*=\SPACES*(?P<byte_order>.+)".replace(
@@ -295,10 +299,44 @@ class ERG(object):
             mdf.append(sigs, common_timebase=True)
         return mdf
 
+    def export_cm_csv(self, target, columns_filter=[], digits=2):
+        df = self.to_pd()
+
+        # remove none columns
+        df.drop(labels=[c for c in df.columns if "none" in c], axis=1, inplace=True)
+
+        # bring the Time column always to the front (needed for CM input from file)
+        time = df['Time_s']
+        df.drop(labels=['Time_s'], axis=1, inplace=True)
+        df.insert(0, 'Time_s', time)
+
+        # fix the column names
+        df.columns = [c.replace(".", "_").replace("/", "_p_").replace("^2", "_squared") for c in df.columns]
+
+        # filter for specific columns
+        if len(columns_filter) > 0:
+            matches = [c for c in df.columns for f in columns_filter if f in c]
+            matches = ["Time_s", *matches]
+            df = df[matches]
+
+        # remove duplicate columns
+        df = df.loc[:,~df.columns.duplicated()].copy()
+        
+        # round to avoid CM reading errors
+        df = df.round(digits)
+
+        # CM expects the header to start with a #
+        with open(target, "w") as targetFile:
+            targetFile.write(" ".join(["#", *df.columns]) + "\n")
+
+        df.to_csv(target, sep=" ", header=False, index=False, mode="a")
+
     def to_pd(self):
         df = pd.DataFrame()
         for key in self.signals:
-            df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
+            #df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
+            _d = pd.DataFrame(np.array(self.get(key).samples),columns=[str(key + '_' + self.get(key).unit)])
+            df = pd.concat([df,_d],axis=1)
         return df
 
     def get(self, name, raw=False):
