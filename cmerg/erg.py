@@ -191,8 +191,12 @@ class ERG(object):
         pass
 
     def _read(self):
-        with open(str(self.name) + ".info") as info_file:
-            info = info_file.read()
+        try:
+            with open(str(self.name) + ".info") as info_file:
+                info = info_file.read()
+        except:
+            with open(str(self.name) + ".info", encoding="latin-1") as info_file:
+                info = info_file.read()
 
         # search for byteorder
         pattern = r"\SPACES*File\.ByteOrder\SPACES*=\SPACES*(?P<byte_order>.+)".replace(
