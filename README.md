@@ -80,11 +80,11 @@ Export ERG file to CarMaker compliant csv (e.g. for import using `Import from Fi
 
 ```python
 log1 = cmerg.ERG('data-file.erg')
-log1.export_cm_csv()
+log1.export_cm_csv("./target.csv")
 
 # its also possible to export only quantities that matches a namespace:
-log1.export_cm_csv(columns_filter=["Car_Road"])
+log1.export_cm_csv("./target.csv", columns_filter=["Car_Road"])
 
 # CM's Import from File cannot handle many digits well, therefore the exported values are rounded. The number of digits can be sepcified:
-log1.export_cm_csv(columns_filter=["Car_Road"], digits=5)
+log1.export_cm_csv("./target.csv", columns_filter=["Car_Road"], digits=5)
 ```
