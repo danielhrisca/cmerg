@@ -29,7 +29,7 @@ keywords = ["carmaker", "erg", "development"]
 Homepage = "https://github.com/danielhrisca/cmerg"
 
 [tool.hatch.version]
-path = "cmerg/version.py"
+path = "src/cmerg/version.py"
 
 [tool.ruff]
 line-length = 100
