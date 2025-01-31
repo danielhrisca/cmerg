@@ -333,14 +333,10 @@ class ERG(object):
         df.to_csv(target, sep=" ", header=False, index=False, mode="a")
 
     def to_pd(self):
-        df = pd.DataFrame()
-        for key in self.signals:
-            # df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
-            _d = pd.DataFrame(
-                np.array(self.get(key).samples), columns=[str(key + "_" + self.get(key).unit)]
-            )
-            df = pd.concat([df, _d], axis=1)
-        return df
+        signal_data = OrderedDict()
+        for key, erg_signal in self.signals.items():
+            signal_data[f'{key}_{erg_signal.unit}'] = np.array(erg_signal.data)
+        return pd.DataFrame(signal_data)
 
     def get(self, name, raw=False):
         """
