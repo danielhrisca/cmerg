@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-""" cmerg version module """
+"""cmerg version module"""
 
-
-__all__ = ['__version__']
+__all__ = ["__version__"]
 
 
 __version__ = "0.4.dev0"
