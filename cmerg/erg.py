@@ -16,6 +16,11 @@ from asammdf import Signal, MDF
 from asammdf import __version__ as asammdf_version
 from asammdf.blocks.v4_blocks import ChannelConversion
 
+if np.lib.NumpyVersion(np.__version__) >= "2.0.0b1":
+    from numpy.rec import fromstring
+else:
+    from numpy.core.records import fromstring
+
 
 PY_VERSION = sys.version_info[0]
 
@@ -272,9 +277,7 @@ class ERG(object):
         with open(self.name, "rb") as erg_file:
             data = erg_file.read()[16:]
 
-        data = np.core.records.fromstring(
-            data, dtype=data_types, byteorder=self.byteorder,
-        )
+        data = fromstring(data, dtype=data_types, byteorder=self.byteorder)
 
         for signal in self.signals.values():
             signal.data = data[signal.name]
