@@ -1,11 +1,11 @@
 # cmerg
-Python parser for CarMaker ERG files with Pandas dataframe export.
+Python parser for CarMaker ERG files with Pandas DataFrame export.
 
 ##
 
 ## Use and Examples
 
-Moslty these are notes for myself but hopefully someone else finds them useful.
+Mostly these are notes for myself but hopefully someone else finds them useful.
 
 ### Installation
 
@@ -36,7 +36,7 @@ Create ERG file object. (Using example file from repo)
 
 ``` log1 = cmerg.ERG('test-data/Test-Dataset-1_175937.erg') ```
 
-List of the signals in the file.
+Dictionary of the signals in the file.
 
 ``` log1.signals ```
 
@@ -48,11 +48,11 @@ Plot signal.
 
 ``` speed.plot() ```
 
-Add signal to dataframe.
+Add signal to DataFrame.
 
 ``` python
 
-# New easy call to return a pandas dataframe.
+# New easy call to return a pandas DataFrame.
 df = log1.to_pd()
 
 ```
@@ -60,7 +60,6 @@ df = log1.to_pd()
 ``` python
 
 # Simple example of adding ERG data to pandas.
-# TODO: Make 'toPd()' call
 import cmerg
 import pandas as pd
 import numpy as np
@@ -72,7 +71,7 @@ speed = log1.get('Vhcl.v')
 t = np.array(speed.timestamps)
 spd = np.array(speed.samples)
 
-df = pd.DataFrame({'time':t, 'speed':spd})
+df = pd.DataFrame({'time': t, 'speed': spd})
 
 ```
 
@@ -82,9 +81,9 @@ Export ERG file to CarMaker compliant csv (e.g. for import using `Import from Fi
 log1 = cmerg.ERG('data-file.erg')
 log1.export_cm_csv("./target.csv")
 
-# its also possible to export only quantities that matches a namespace:
-log1.export_cm_csv("./target.csv", columns_filter=["Car_Road"])
+# it's also possible to export only quantities that matches a namespace:
+log1.export_cm_csv("./target.csv", columns_filter=["Car_"])
 
 # CM's Import from File cannot handle many digits well, therefore the exported values are rounded. The number of digits can be sepcified:
-log1.export_cm_csv("./target.csv", columns_filter=["Car_Road"], digits=5)
+log1.export_cm_csv("./target.csv", columns_filter=["Car_"], digits=5)
 ```
