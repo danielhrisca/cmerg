@@ -1,4 +1,3 @@
-# pylint: disable=C0301
 """
 This modules implements the reader for the ERG binary file type generate by
 IPG CarMaker.
@@ -90,10 +89,11 @@ class ERGSignal(object):
     data_type : string
         data type description
     unit : string
+        signal unit
     factor : float
-        factor used for liniar conversion
+        factor used for linear conversion
     offset : float
-        offset used for liniar conversion
+        offset used for linear conversion
 
     Attributes
     ----------
@@ -107,9 +107,9 @@ class ERGSignal(object):
     byte_size : int
         number of bytes of a signal sample
     factor : float
-        factor used for liniar conversion
+        factor used for linear conversion
     offset : float
-        offset used for liniar conversion
+        offset used for linear conversion
     data : numpy.array
         signal samples
 
@@ -139,7 +139,7 @@ class ERG(object):
 
     A CarMaker measurement is split into two files: an information file (.info)
     that holds information regarding the ERG version, CarMaker version,
-    an signal metadata, and the binary file that holds the measurement samples.
+    and signal metadata, and the binary file that holds the measurement samples.
 
     Parameters
     ----------
@@ -179,10 +179,10 @@ class ERG(object):
         ----------
         signals : list
             list of numpy array samples
-        signal_names  : lsit
-            list of signal names strings
+        signal_names  : list
+            list of signal names as strings
         signal_units : list
-            list of signal units strings
+            list of signal units as strings
 
         """
         for sig, name, unit in zip(signals, signal_names, signal_units):
@@ -191,7 +191,7 @@ class ERG(object):
 
     def save(self):
         """not implemented"""
-        pass
+        raise NotImplementedError
 
     def _read(self):
         try:
@@ -335,7 +335,7 @@ class ERG(object):
     def to_pd(self):
         signal_data = OrderedDict()
         for key, erg_signal in self.signals.items():
-            signal_data[f'{key}_{erg_signal.unit}'] = np.array(erg_signal.data)
+            signal_data[f"{key}_{erg_signal.unit}"] = np.array(erg_signal.data)
         return pd.DataFrame(signal_data)
 
     def get(self, name, raw=False):
