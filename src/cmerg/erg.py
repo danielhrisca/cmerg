@@ -1,4 +1,3 @@
-# pylint: disable=C0301
 """
 This modules implements the reader for the ERG binary file type generate by
 IPG CarMaker.
@@ -13,8 +12,12 @@ import pandas as pd
 import datetime
 
 from asammdf import Signal, MDF
-from asammdf import __version__ as asammdf_version
 from asammdf.blocks.v4_blocks import ChannelConversion
+
+if np.lib.NumpyVersion(np.__version__) >= "2.0.0b1":
+    from numpy.rec import fromstring
+else:
+    from numpy.core.records import fromstring
 
 
 PY_VERSION = sys.version_info[0]
@@ -86,10 +89,11 @@ class ERGSignal(object):
     data_type : string
         data type description
     unit : string
+        signal unit
     factor : float
-        factor used for liniar conversion
+        factor used for linear conversion
     offset : float
-        offset used for liniar conversion
+        offset used for linear conversion
 
     Attributes
     ----------
@@ -103,16 +107,15 @@ class ERGSignal(object):
     byte_size : int
         number of bytes of a signal sample
     factor : float
-        factor used for liniar conversion
+        factor used for linear conversion
     offset : float
-        offset used for liniar conversion
+        offset used for linear conversion
     data : numpy.array
         signal samples
 
     """
 
     def __init__(self, name, data_type, unit=None, factor=None, offset=None):
-
         self.name = name.decode("utf-8") if isinstance(name, bytes) else name
         self.data_type = data_type
         self.numpy_dtype = CONVERTER[data_type]
@@ -136,7 +139,7 @@ class ERG(object):
 
     A CarMaker measurement is split into two files: an information file (.info)
     that holds information regarding the ERG version, CarMaker version,
-    an signal metadata, and the binary file that holds the measurement samples.
+    and signal metadata, and the binary file that holds the measurement samples.
 
     Parameters
     ----------
@@ -170,16 +173,16 @@ class ERG(object):
             self._read()
 
     def append(self, signals, signal_names, signal_units):
-        """ appends new signals to the measurement
+        """appends new signals to the measurement
 
         Parameters
         ----------
         signals : list
             list of numpy array samples
-        signal_names  : lsit
-            list of signal names strings
+        signal_names  : list
+            list of signal names as strings
         signal_units : list
-            list of signal units strings
+            list of signal units as strings
 
         """
         for sig, name, unit in zip(signals, signal_names, signal_units):
@@ -187,14 +190,14 @@ class ERG(object):
             self.signals[name].data = sig
 
     def save(self):
-        """ not implemented """
-        pass
+        """not implemented"""
+        raise NotImplementedError
 
     def _read(self):
         try:
             with open(str(self.name) + ".info") as info_file:
                 info = info_file.read()
-        except:
+        except Exception:
             with open(str(self.name) + ".info", encoding="latin-1") as info_file:
                 info = info_file.read()
 
@@ -258,23 +261,19 @@ class ERG(object):
             if offset:
                 offset = offset.group("offset")
 
-            self.signals[name] = ERGSignal(name, data_type, unit, factor, offset,)
+            self.signals[name] = ERGSignal(name, data_type, unit, factor, offset)
 
         if PY_VERSION == 2:
             data_types = np.dtype(
                 [(s.name.encode("utf-8"), s.numpy_dtype) for s in self.signals.values()]
             )
         elif PY_VERSION == 3:
-            data_types = np.dtype(
-                [(s.name, s.numpy_dtype) for s in self.signals.values()]
-            )
+            data_types = np.dtype([(s.name, s.numpy_dtype) for s in self.signals.values()])
 
         with open(self.name, "rb") as erg_file:
             data = erg_file.read()[16:]
 
-        data = np.core.records.fromstring(
-            data, dtype=data_types, byteorder=self.byteorder,
-        )
+        data = fromstring(data, dtype=data_types, byteorder=self.byteorder)
 
         for signal in self.signals.values():
             signal.data = data[signal.name]
@@ -306,12 +305,14 @@ class ERG(object):
         df.drop(labels=[c for c in df.columns if "none" in c], axis=1, inplace=True)
 
         # bring the Time column always to the front (needed for CM input from file)
-        time = df['Time_s']
-        df.drop(labels=['Time_s'], axis=1, inplace=True)
-        df.insert(0, 'Time_s', time)
+        time = df["Time_s"]
+        df.drop(labels=["Time_s"], axis=1, inplace=True)
+        df.insert(0, "Time_s", time)
 
         # fix the column names
-        df.columns = [c.replace(".", "_").replace("/", "_p_").replace("^2", "_squared") for c in df.columns]
+        df.columns = [
+            c.replace(".", "_").replace("/", "_p_").replace("^2", "_squared") for c in df.columns
+        ]
 
         # filter for specific columns
         if len(columns_filter) > 0:
@@ -320,8 +321,8 @@ class ERG(object):
             df = df[matches]
 
         # remove duplicate columns
-        df = df.loc[:,~df.columns.duplicated()].copy()
-        
+        df = df.loc[:, ~df.columns.duplicated()].copy()
+
         # round to avoid CM reading errors
         df = df.round(digits)
 
@@ -332,12 +333,10 @@ class ERG(object):
         df.to_csv(target, sep=" ", header=False, index=False, mode="a")
 
     def to_pd(self):
-        df = pd.DataFrame()
-        for key in self.signals:
-            #df[str(key + '_' + self.get(key).unit)] = np.array(self.get(key).samples)
-            _d = pd.DataFrame(np.array(self.get(key).samples),columns=[str(key + '_' + self.get(key).unit)])
-            df = pd.concat([df,_d],axis=1)
-        return df
+        signal_data = OrderedDict()
+        for key, erg_signal in self.signals.items():
+            signal_data[f"{key}_{erg_signal.unit}"] = np.array(erg_signal.data)
+        return pd.DataFrame(signal_data)
 
     def get(self, name, raw=False):
         """
@@ -359,7 +358,7 @@ class ERG(object):
 
         """
         if name not in self.signals:
-            raise Exception('Channel "{}" not found in "{}"'.format(name, self.name,))
+            raise Exception('Channel "{}" not found in "{}"'.format(name, self.name))
 
         signal = self.signals[name]
         samples = signal.data
@@ -373,7 +372,7 @@ class ERG(object):
                 samples = samples * signal.factor + signal.offset
         else:
             if signal.factor is not None:
-                conversion = ChannelConversion(a=signal.factor, b=signal.offset,)
+                conversion = ChannelConversion(a=signal.factor, b=signal.offset)
             else:
                 conversion = None
                 raw = False
